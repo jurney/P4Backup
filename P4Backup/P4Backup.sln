@@ -1,0 +1,56 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual C# Express 2008
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P4Backup", "P4Backup.csproj", "{B0E16941-E7F1-48C6-9632-23DC7F05537A}"
+	ProjectSection(ProjectDependencies) = postProject
+		{F6FB4167-0385-463F-9C40-C58405636EF9} = {F6FB4167-0385-463F-9C40-C58405636EF9}
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD} = {BD32826A-68E4-4A90-8DBE-E2B129631BBD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P4Shell", "..\P4Shell\P4Shell.csproj", "{F6FB4167-0385-463F-9C40-C58405636EF9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelicLogging", "..\RelicLogging\RelicLogging.csproj", "{BD32826A-68E4-4A90-8DBE-E2B129631BBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{B0E16941-E7F1-48C6-9632-23DC7F05537A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B0E16941-E7F1-48C6-9632-23DC7F05537A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B0E16941-E7F1-48C6-9632-23DC7F05537A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B0E16941-E7F1-48C6-9632-23DC7F05537A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F6FB4167-0385-463F-9C40-C58405636EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6FB4167-0385-463F-9C40-C58405636EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6FB4167-0385-463F-9C40-C58405636EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6FB4167-0385-463F-9C40-C58405636EF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(SourceCodeControl) = preSolution
+		SccNumberOfProjects = 4
+		SccProjectUniqueName0 = P4Backup.csproj
+		SccLocalPath0 = ..\\..
+		CanCheckoutShared = true
+		SccProjectFilePathRelativizedFromConnection0 = tools\\P4Backup\\
+		SccProjectUniqueName1 = ..\\..\\Shared\\P4Shell\\P4Shell.csproj
+		SccLocalPath1 = ..\\..
+		CanCheckoutShared = true
+		SccProjectFilePathRelativizedFromConnection1 = Shared\\P4Shell\\
+		SccProjectUniqueName2 = ..\\..\\Shared\\RelicLogging\\RelicLogging.csproj
+		SccLocalPath2 = ..\\..
+		CanCheckoutShared = true
+		SccProjectFilePathRelativizedFromConnection2 = Shared\\RelicLogging\\
+		SccProjectName3 = Perforce\u0020Project
+		SccLocalPath3 = ..\\..
+		SccProvider3 = MSSCCI:Perforce\u0020SCM
+		CanCheckoutShared = true
+		SccProjectFilePathRelativizedFromConnection3 = tools\\P4Backup\\
+	EndGlobalSection
+EndGlobal

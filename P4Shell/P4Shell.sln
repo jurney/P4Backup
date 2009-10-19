@@ -1,0 +1,29 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 9.00
+# Visual Studio 2005
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "P4Shell", "P4Shell.csproj", "{F6FB4167-0385-463F-9C40-C58405636EF9}"
+	ProjectSection(ProjectDependencies) = postProject
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD} = {BD32826A-68E4-4A90-8DBE-E2B129631BBD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RelicLogging", "..\RelicLogging\RelicLogging.csproj", "{BD32826A-68E4-4A90-8DBE-E2B129631BBD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{F6FB4167-0385-463F-9C40-C58405636EF9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F6FB4167-0385-463F-9C40-C58405636EF9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F6FB4167-0385-463F-9C40-C58405636EF9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F6FB4167-0385-463F-9C40-C58405636EF9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD32826A-68E4-4A90-8DBE-E2B129631BBD}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
