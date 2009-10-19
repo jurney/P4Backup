@@ -473,7 +473,7 @@ namespace Perforce
 		{
 			if( P4Shell.Online == false )
 				return null;
-
+                
 			if( changelistID <= 0 )
 			{
 				Execute( "change -o", null );
@@ -531,7 +531,7 @@ namespace Perforce
 				{
 					++lineIndex;
 
-					string description = "";					
+                    StringBuilder description = new StringBuilder(1024);
 
 					// Each line in the description starts with a tab. So read every line until the end of the file,
 					// or until the line doesn't start with a tab.
@@ -547,12 +547,12 @@ namespace Perforce
 							break;
 						}
 
-						description += line.Substring( line.IndexOf( '\t' ) + 1 );
+                        description.AppendLine(line.Substring( line.IndexOf( '\t' ) + 1 ));
 
 						++lineIndex;
 					}									
 										
-					changelist.Description = description;
+					changelist.Description = description.ToString();
 				}
 				else if( line.StartsWith( "Files:" ) )
 				{

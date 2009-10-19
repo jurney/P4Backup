@@ -8,6 +8,7 @@ namespace P4Backup
     class Program
     {
 		private static string k_DeletesFilename = "__deletes.txt";
+        private static string k_DescFilename = "__description.txt";
 
         static void Main(string[] argsOrig)
         {
@@ -137,8 +138,10 @@ namespace P4Backup
             Console.WriteLine("without having to create a new personal P4 branch.  This tool handles");
             Console.WriteLine("deletes by storing them in __deletes.txt in the root backup folder.");
             Console.WriteLine("This means you can't have a file named __deletes.txt as part of a");
-            Console.WriteLine("backup or restore operation, or it will ruin your day.  This tool");
-            Console.WriteLine("will restore integrate/branch operations as simple edits.");
+            Console.WriteLine("backup or restore operation, or it will ruin your day.  The same goes");
+            Console.WriteLine("for __description.txt, since this is where the changelist description");
+            Console.WriteLine("is stored.  This tool will restore integrate/branch operations as");
+            Console.WriteLine("simple edits.");
             Console.WriteLine("");
             Console.WriteLine("There are 2 commands for P4Backup:  -backup and -restore.  If neither is");
             Console.WriteLine("specified, it will default to running -backup.  Each has some options...");
@@ -232,9 +235,25 @@ namespace P4Backup
                 backupDir += "\\" + System.DateTime.Now.ToString("s").Replace(':', '_');
             }
 
+            string desc = "";
+
+            if(changelist != -1)
+            {
+                Changelist cl = P4Shell.GetChangelist(changelist);
+                if (cl == null)
+                {
+                    Console.WriteLine("ERROR: Missing -backupdir parameter.");
+                    return;
+                }
+                else
+                {
+                    desc = cl.Description;
+                }
+            }
+
             List<FileStats> openedFiles = P4Shell.GetOpenedFileStats(changelist);
 
-            DoBackup(openedFiles, backupDir);
+            DoBackup(openedFiles, backupDir, desc);
         }
 
         static void RestoreCommand(string[] args)
@@ -312,20 +331,11 @@ namespace P4Backup
                 return;
             }
 
-            // Make the new changelist to hold the restored files in P4.
-            int changeListID = -1;
-
-            if (!P4Shell.CreateChangelist("P4Backup restored files", ref changeListID))
-            {
-                Console.WriteLine("ERROR: Failed to create new changelist.");
-                Console.WriteLine(P4Shell.Error);
-                return;
-            }
-
             string filesForEdit = "";
             string filesForAdd = "";
 
             System.IO.FileInfo deletedFileInfo = null;
+            System.IO.FileInfo descFileInfo = null;
 
             // Find any existing files that need to be opened for edit, the rest are for add.
             foreach (System.IO.FileInfo fileInfo in fileInfos)
@@ -333,6 +343,10 @@ namespace P4Backup
                 if(fileInfo.Name == k_DeletesFilename)
                 {
                     deletedFileInfo = fileInfo;
+                }
+                else if (fileInfo.Name == k_DescFilename)
+                {
+                    descFileInfo = fileInfo;
                 }
                 else
                 {
@@ -348,6 +362,36 @@ namespace P4Backup
                     }
                 }
             }
+
+            string desc = "P4Backup restored files";
+
+            // Remove __description.txt from the list of fileinfos, since it's not a real p4 file to be restored
+            if (descFileInfo != null)
+            {
+                fileInfos.Remove(descFileInfo);
+
+                try
+                {
+                    System.IO.StreamReader SR = descFileInfo.OpenText();
+                    desc = SR.ReadToEnd();
+                }
+                catch (System.IO.IOException e)
+                {
+                    Console.WriteLine("ERROR: Failed to open \"__description.txt\". Aborting.  Error: " + e.Message);
+                    return;
+                }
+            }
+
+            // Make the new changelist to hold the restored files in P4.
+            int changeListID = -1;
+
+            if (!P4Shell.CreateChangelist(desc, ref changeListID))
+            {
+                Console.WriteLine("ERROR: Failed to create new changelist.");
+                Console.WriteLine(P4Shell.Error);
+                return;
+            }
+            
 
             // Remove __deletes.txt from the the list of fileinfos, since it's not a real p4 file to be restored
             if(deletedFileInfo != null)
@@ -432,7 +476,7 @@ namespace P4Backup
             Console.WriteLine("\nRestore successful.");
         }
 
-        static void DoBackup(List<FileStats> files, string backupDir)
+        static void DoBackup(List<FileStats> files, string backupDir, string optDesc)
         {
             List<string> deletes = new List<string>();
 
@@ -492,6 +536,25 @@ namespace P4Backup
                 catch (System.IO.IOException e)
                 {
                     Console.WriteLine("    Failed to create __deletes.txt.  Error: " + e.Message);
+                }
+            }
+
+            if (optDesc.Length > 0)
+            {
+                Console.WriteLine("Writing description to __description.txt in \"" + backupDir + "\"...");
+
+                string descFilename = backupDir + "\\" + k_DescFilename;
+
+                try
+                {
+                    System.IO.Directory.CreateDirectory(backupDir);
+                    System.IO.StreamWriter SW = System.IO.File.CreateText(descFilename);
+                    SW.Write(optDesc);
+                    SW.Close();
+                }
+                catch (System.IO.IOException e)
+                {
+                    Console.WriteLine("    Failed to create __description.txt.  Error: " + e.Message);
                 }
             }
         }
