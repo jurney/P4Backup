@@ -24,10 +24,10 @@
     <UpgradeBackupLocation>
     </UpgradeBackupLocation>
     <IsWebBootstrapper>false</IsWebBootstrapper>
-    <ManifestCertificateThumbprint>D937D27EFB4605E6ADBC4DD97C65F7414DD1B8E6</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>85801F82B3CC5915D4E31089A912E26CF20B2B42</ManifestCertificateThumbprint>
     <ManifestKeyFile>P4Backup_TemporaryKey.pfx</ManifestKeyFile>
     <GenerateManifests>true</GenerateManifests>
-    <SignManifests>true</SignManifests>
+    <SignManifests>false</SignManifests>
     <PublishUrl>..\publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -49,7 +49,7 @@
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
-    <OutputPath>..\..\..\Obj\PC\Bin\</OutputPath>
+    <OutputPath>..\Bin\</OutputPath>
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
@@ -112,9 +112,6 @@
       <Project>{BD32826A-68E4-4A90-8DBE-E2B129631BBD}</Project>
       <Name>RelicLogging</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="P4Backup_TemporaryKey.pfx" />
   </ItemGroup>
   <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
